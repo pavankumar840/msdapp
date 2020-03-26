@@ -20,31 +20,29 @@ router.post('/addUser', async (req, res) => {
   res.json(userModel);
 });
 
+router.get('/getUsers', async (req, res) =>{
+  User.find().then(doc =>{
+    res.json(doc);
+  });
+});
 
-// router.get('/getUsers', async (req, res) =>{
-//   User.find().then(doc =>{
-//     res.json(doc);
-//   });
-// });
+router.post('/findLoger', async (req, res) =>{
+  User.find({username : req.body.username, password: req.body.password})
+  .then(doc =>{
+      res.json(doc);
+  })
+  .catch(error =>{
+    console.log(error);
+  })
+});
 
-
-// router.post('/findLoger', async (req, res) =>{
-//   User.find({username : req.body.username, password: req.body.password})
-//   .then(doc =>{
-//       res.json(doc);
-//   })
-//   .catch(error =>{
-//     console.log(error);
-//   })
-// });
-
-// router.post('/getuser', async(req, res) =>{
-//   User.find({username : req.body.username})
-//   .then(doc => {
-//     res.json(doc);
-//   })
-//   .catch(error => console.error);
-// });
+router.post('/getuser', async(req, res) =>{
+  User.find({username : req.body.username})
+  .then(doc => {
+    res.json(doc);
+  })
+  .catch(error => console.error);
+});
 
 
 module.exports = router;
