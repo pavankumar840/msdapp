@@ -4,6 +4,9 @@ var router = express.Router();
 const User = require("../public/javascripts/users");
 
 /* GET users listing. */
+router.get('/', async (req, res) => {
+  res.send("u can see all users");
+})
 router.post('/addUser', async (req, res) => {
   const { name, dob, interests, username, password } = req.body;
   let user = {};
