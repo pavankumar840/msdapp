@@ -7,6 +7,7 @@ const User = require("../public/javascripts/users");
 router.get('/', async (req, res) => {
   res.send("u can see all users");
 })
+
 router.post('/addUser', async (req, res) => {
   const { name, dob, interests, username, password } = req.body;
   let user = {};
@@ -19,6 +20,15 @@ router.post('/addUser', async (req, res) => {
   await userModel.save();
   res.json(userModel);
 });
+router.post('/checkforuser', (req, res) =>{
+  User.find({username: req.body.username})
+  .then(doc => {
+    res.json(doc)
+  })
+  .catch(error =>{
+    console.log(error);
+  })
+})
 
 router.get('/getUsers', async (req, res) =>{
   User.find().then(doc =>{
