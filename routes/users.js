@@ -44,5 +44,4 @@ router.post('/getuser', async(req, res) =>{
   .catch(error => console.error);
 });
 
-
 module.exports = router;

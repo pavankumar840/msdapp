@@ -15,11 +15,9 @@ router.post('/sendMessage', async (req, res) =>{
     res.json(userModel);
 });
 
-router.get('/getMessage', async (req, res) => {
-    const {senderid, receiverid} = req.body;
-    Message.find({
-        senderid: senderid, receiverid: receiverid
-    }).sort({sentat: 1}).then(doc =>{
+router.post('/getMessage', async (req, res) => {
+    console.log(req.body);
+    Message.find({senderid: req.body.senderid,receiverid: req.body.receiverid}).then(doc =>{
         res.json(doc);
     }).catch(error => {
         console.log(error);
