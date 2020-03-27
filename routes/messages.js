@@ -17,9 +17,14 @@ router.post('/sendMessage', async (req, res) =>{
 
 router.post('/getMessage', async (req, res) => {
     console.log(req.body);
-    Message.find({senderid: req.body.senderid,receiverid: req.body.receiverid}).then(doc =>{
-        res.json(doc);
-    }).catch(error => {
+    Message.find({ 
+        $or:[{senderid: req.body.senderid,receiverid: req.body.receiverid},
+         {senderid: req.body.receiverid,receiverid: req.body.senderid} ]})
+         .sort({sentat: 1})
+         .then(doc =>{
+             res.json(doc);
+            })
+         .catch(error => {
         console.log(error);
     })
   });
